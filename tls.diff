@@ -1,0 +1,13 @@
+diff --git a/components/esp-tls/esp_tls.c b/components/esp-tls/esp_tls.c
+index 06569db8c..c32aea55e 100644
+--- a/components/esp-tls/esp_tls.c
++++ b/components/esp-tls/esp_tls.c
+@@ -105,7 +105,7 @@ int esp_tls_conn_destroy(esp_tls_t *tls)
+     if (tls != NULL) {
+         int ret = 0;
+         _esp_tls_conn_delete(tls);
+-        if (tls->sockfd >= 0) {
++        if (tls->sockfd >= 0 && !tls->is_tls) {
+             ret = close(tls->sockfd);
+         }
+         esp_tls_internal_event_tracker_destroy(tls->error_handle);
